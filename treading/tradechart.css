@@ -1,0 +1,375 @@
+/* Base Styles */
+:root {
+  --primary-color: #10b981;
+  --dark-bg: #1a1a1a;
+  --card-bg: #1f2937;
+  --card-header-bg: #111827;
+  --text-light: #ffffff;
+  --text-muted: #9ca3af;
+  --border-color: #374151;
+  --up-color: #26A69A;
+  --down-color: #EF5350;
+  --hover-bg: rgba(255, 255, 255, 0.05);
+  --chart-bg: #131722;
+  --chart-grid: #1c2030;
+  --chart-text: #D9D9D9;
+  --chart-highlight: #FFD700;
+  --current-price-box: #ff4d5b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #f0fdf4, #ffffff);
+  color: #333;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Dashboard Layout */
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.crypto-list-container {
+  flex: 1;
+  min-width: 300px;
+}
+
+.trading-chart-container {
+  flex: 2;
+  min-width: 500px;
+}
+
+/* Card Styles */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  background-color: var(--card-header-bg);
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.card-header h2 {
+  color: var(--text-light);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* Exchange Navigation */
+.exchange-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.exchange-btn {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  position: relative;
+}
+
+.exchange-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.exchange-btn.active {
+  color: var(--primary-color);
+  background-color: transparent;
+}
+
+.exchange-btn.active::after {
+  width: 100%;
+  animation: slide-in 0.3s ease-out;
+}
+
+@keyframes slide-in {
+  0% {
+    width: 0;
+    left: 0;
+  }
+  100% {
+    width: 100%;
+    left: 0;
+  }
+}
+
+.exchange-btn:hover:not(.active) {
+  color: var(--primary-color);
+}
+
+.exchange-btn:hover:not(.active)::after {
+  width: 50%;
+}
+
+/* Animated bottom line for card header */
+.card-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, var(--primary-color), transparent);
+  animation: slide-left-to-right 2s infinite;
+}
+
+@keyframes slide-left-to-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Crypto List Styles */
+.crypto-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.crypto-list-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 0.75rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.crypto-list-header div:nth-child(2),
+.crypto-list-header div:nth-child(3) {
+  text-align: right;
+}
+
+.crypto-list-content {
+  overflow-y: auto;
+  max-height: calc(100vh - 300px);
+}
+
+.crypto-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-light);
+  transition: background-color 0.3s ease;
+}
+
+.crypto-item:hover {
+  background-color: var(--hover-bg);
+}
+
+.crypto-name {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.crypto-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.crypto-symbol {
+  font-weight: 500;
+}
+
+.crypto-price {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+.crypto-change {
+  text-align: right;
+}
+
+.change-badge {
+  display: inline-block;
+  min-width: 80px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.change-up {
+  background-color: rgba(38, 166, 154, 0.2);
+  color: var(--up-color);
+}
+
+.change-down {
+  background-color: rgba(239, 83, 80, 0.2);
+  color: var(--down-color);
+}
+
+/* Price Animation */
+.price-up {
+  animation: flash-green 1s;
+}
+
+.price-down {
+  animation: flash-red 1s;
+}
+
+@keyframes flash-green {
+  0% { background-color: rgba(38, 166, 154, 0.2); }
+  100% { background-color: transparent; }
+}
+
+@keyframes flash-red {
+  0% { background-color: rgba(239, 83, 80, 0.2); }
+  100% { background-color: transparent; }
+}
+
+/* Chart Styles */
+.chart-container {
+  padding: 1rem;
+  height: 100%;
+  background-color: var(--chart-bg);
+  border-radius: 0.25rem;
+}
+
+.interval-selector {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.interval-btn {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  border: none;
+  background-color: #374151;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.interval-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.interval-btn:hover:not(.active) {
+  background-color: #4B5563;
+}
+
+#tradingChart {
+  width: 100%;
+  height: 400px;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .crypto-list-container,
+  .trading-chart-container {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .crypto-list-content {
+    max-height: 300px;
+  }
+
+  #tradingChart {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .crypto-list-header,
+  .crypto-item {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+
+  .crypto-name {
+    gap: 0.5rem;
+  }
+
+  .change-badge {
+    min-width: 60px;
+    font-size: 0.7rem;
+  }
+
+  .interval-selector {
+    flex-wrap: wrap;
+  }
+}
