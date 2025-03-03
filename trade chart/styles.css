@@ -1,0 +1,410 @@
+/* Base Styles */
+:root {
+  --primary-color: #10b981;
+  --dark-bg: #1a1a1a;
+  --card-bg: #1f2937;
+  --card-header-bg: #111827;
+  --text-light: #ffffff;
+  --text-muted: #9ca3af;
+  --border-color: #374151;
+  --up-color: #26A69A;
+  --down-color: #EF5350;
+  --hover-bg: rgba(255, 255, 255, 0.05);
+  --chart-bg: #131722;
+  --chart-grid: #1c2030;
+  --chart-text: #D9D9D9;
+  --chart-highlight: #FFD700;
+  --current-price-box: #ff4d5b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #f0fdf4, #ffffff);
+  color: #333;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header Styles */
+header {
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo i {
+  font-size: 1.5rem;
+}
+
+.logo h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+.exchange-btn {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.exchange-btn.active {
+  border-bottom: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+/* Mobile Sidebar */
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: var(--dark-bg);
+  z-index: 1000;
+  transition: left 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-sidebar.active {
+  left: 0;
+}
+
+.sidebar-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header h2 {
+  font-size: 1.25rem;
+  color: var(--text-light);
+}
+
+.mobile-nav ul {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.mobile-nav .exchange-btn {
+  text-align: left;
+  padding: 0.5rem 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+/* Dashboard Layout */
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.crypto-list-container {
+  flex: 1;
+  min-width: 300px;
+}
+
+.trading-chart-container {
+  flex: 2;
+  min-width: 500px;
+}
+
+/* Card Styles */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  background-color: var(--card-header-bg);
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h2 {
+  color: var(--text-light);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* Crypto List Styles */
+.crypto-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.crypto-list-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 0.75rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.crypto-list-header div:nth-child(2),
+.crypto-list-header div:nth-child(3) {
+  text-align: right;
+}
+
+.crypto-list-content {
+  overflow-y: auto;
+  max-height: calc(100vh - 300px);
+}
+
+.crypto-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-light);
+  transition: background-color 0.3s ease;
+}
+
+.crypto-item:hover {
+  background-color: var(--hover-bg);
+}
+
+.crypto-name {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.crypto-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.crypto-symbol {
+  font-weight: 500;
+}
+
+.crypto-price {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+.crypto-change {
+  text-align: right;
+}
+
+.change-badge {
+  display: inline-block;
+  min-width: 80px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.change-up {
+  background-color: rgba(38, 166, 154, 0.2);
+  color: var(--up-color);
+}
+
+.change-down {
+  background-color: rgba(239, 83, 80, 0.2);
+  color: var(--down-color);
+}
+
+/* Price Animation */
+.price-up {
+  animation: flash-green 1s;
+}
+
+.price-down {
+  animation: flash-red 1s;
+}
+
+@keyframes flash-green {
+  0% { background-color: rgba(38, 166, 154, 0.2); }
+  100% { background-color: transparent; }
+}
+
+@keyframes flash-red {
+  0% { background-color: rgba(239, 83, 80, 0.2); }
+  100% { background-color: transparent; }
+}
+
+/* Chart Styles */
+.chart-container {
+  padding: 1rem;
+  height: 100%;
+  background-color: var(--chart-bg);
+  border-radius: 0.25rem;
+}
+
+.interval-selector {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.interval-btn {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  border: none;
+  background-color: #374151;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.interval-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.interval-btn:hover:not(.active) {
+  background-color: #4B5563;
+}
+
+#tradingChart {
+  width: 100%;
+  height: 400px;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .crypto-list-container,
+  .trading-chart-container {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .crypto-list-content {
+    max-height: 300px;
+  }
+
+  #tradingChart {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .crypto-list-header,
+  .crypto-item {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+
+  .crypto-name {
+    gap: 0.5rem;
+  }
+
+  .change-badge {
+    min-width: 60px;
+    font-size: 0.7rem;
+  }
+
+  .interval-selector {
+    flex-wrap: wrap;
+  }
+}

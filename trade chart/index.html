@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Crypto Quotes</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    
+
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar -->
+  <div class="mobile-sidebar" id="mobileSidebar">
+    <div class="sidebar-header">
+      <h2>Exchanges</h2>
+    </div>
+    <nav class="mobile-nav">
+      <ul>
+        <li><button class="exchange-btn active" data-exchange="binance">BINANCE</button></li>
+        <li><button class="exchange-btn" data-exchange="bybit">BYBIT</button></li>
+        <li><button class="exchange-btn" data-exchange="huobi">HUOBI</button></li>
+        <li><button class="exchange-btn" data-exchange="coinbase">COINBASE</button></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main class="container">
+    <div class="dashboard">
+      <div class="crypto-list-container">
+        <div class="card">
+          <div class="card-header">
+            <h2 id="exchangeTitle">Binance</h2>
+          </div>
+          <div class="crypto-list">
+            <div class="crypto-list-header">
+              <div>Name</div>
+              <div>Last Price</div>
+              <div>24h Change</div>
+            </div>
+            <div id="cryptoListContent" class="crypto-list-content">
+              <!-- Crypto items will be added here by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trading-chart-container">
+        <div class="card">
+          <div class="card-header">
+            <h2>Trading Chart</h2>
+          </div>
+          <div class="chart-container">
+            <div class="interval-selector">
+              <button class="interval-btn" data-interval="1000">1s</button>
+              <button class="interval-btn active" data-interval="5000">5s</button>
+              <button class="interval-btn" data-interval="10000">10s</button>
+              <button class="interval-btn" data-interval="60000">1m</button>
+              <button class="interval-btn" data-interval="120000">2m</button>
+              <button class="interval-btn" data-interval="300000">5m</button>
+            </div>
+            <canvas id="tradingChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="overlay" class="overlay"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
